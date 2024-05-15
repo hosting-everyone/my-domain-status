@@ -62,12 +62,11 @@ class Constellation
    * @param boolean $admin
    * @return array of services
    */
-  public function render_status($admin = false, $heading = true)
-  {
+
     global $mysqli;
 
     //$query = $mysqli->query("SELECT id, name, description FROM services");
-    $query = $mysqli->query("SELECT services.id, services.name, services.description, services_groups.name as group_name FROM services LEFT JOIN services_groups ON services.group_id=services_groups.id ORDER BY services_groups.name ");
+    $query = $mysqli->query("SELECT services.id, services.name, services.description, services_groups.name as group_name FROM services LEFT JOIN services_groups ON services.group_id=services_groups.id ORDER BY services_groups.name ASC, services.name;");
     $array = array();
     if ($query->num_rows) {
       $timestamp = time();
@@ -91,22 +90,11 @@ class Constellation
     } else {
       $array[] = new Service(0, _("No services"), -1);
     }
-    if (!$admin) {
-      //echo '<div id="status-container" class="clearfix">';
-      //$arrCompletedGroups = array();
-      foreach ($array as $service) {
-        //print_r($service);
-        //if ( !empty($service->group_name) && !in_array($service->group_name, $arrCompletedGroups)) {
-        //print $service->name;
-        //  $arrCompletedGroups[] = $service['group_name'];
-        //  $service->render(true);
-        //} else {
+
         $service->render();
-        //}
       }
       echo '</ul>';
-      //echo '</div>';
-    } else {
+
       return $array;
     }
   }

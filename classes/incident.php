@@ -213,8 +213,7 @@ class Incident implements JsonSerializable
 <?php
   }
 
-  public function jsonSerialize()
-  {
+
     return [
       "id" => $this->id,
       "date" => $this->timestamp,

@@ -35,12 +35,7 @@ class Queue
       //die('prepare() failed: ' . htmlspecialchars($mysqli->error));
       echo $mysqli->errno();
     }
-    #if ( false === $stmt ) { syslog(1, "Error :". $mysqli->error); }
-    $now = time();
-    $res = $stmt->bind_param("iissii", $this->type_id, $this->status, $this->template_data1, $this->template_data2, $now, $this->user_id);
-    if (false === $res) {
-      echo "error";
-      die();
+
     }
     $stmt->execute();
     $query = $stmt->get_result();
@@ -146,6 +141,7 @@ class Queue
         } else {
           Queue::delete_notification($result['task_id'], $result['subscriber_id']); // Failed
         }
+
       }
 
       // Handle email

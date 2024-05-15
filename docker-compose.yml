@@ -1,0 +1,31 @@
+version: '3'
+
+networks:
+  status-db:
+
+services:
+  server-status:
+    build: .
+    volumes:
+      - ./:/var/www/html
+    ports:
+      - 4000:80
+    networks:
+      - status-db
+  dbserver:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: e347h43cve89
+      MYSQL_DATABASE: server_status
+    volumes:
+      - ./database:/var/lib/mysql
+    networks:
+      - status-db
+  mailhog:
+    image: mailhog/mailhog
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+    networks:
+      - status-db

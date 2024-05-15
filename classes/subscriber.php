@@ -188,7 +188,7 @@ class Subscriber
     {
         global $mysqli;
 
-
+        // error_log(print_r($token, TRUE));
         $stmt = $mysqli->prepare("SELECT subscriberID, token, userID, active, expires FROM subscribers WHERE token LIKE ? LIMIT 1");
         $stmt->bind_param("s", $token);
         $stmt->execute();
@@ -200,7 +200,7 @@ class Subscriber
             // No data found, fail gently...
             return false;
         }
-
+        // error_log(print_r($row, TRUE));
         // If account is not already active, check if we are within timeframe of exipre +2h
         // and active if so, otherwise,delete account and return falsev
         if ($row['active'] <> 1) {

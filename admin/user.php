@@ -39,12 +39,7 @@ Template::render_header(_("User"), "user", true);
 
 ?>
 <div class="text-center">
-	<h1><?php
-			if ($_SESSION['user'] == $_GET['id']) {
-				echo _("User settings");
-			} else {
-				echo _("User");
-			} ?></h1>
+
 </div>
 <?php if (isset($message)) { ?>
 	<p class="alert alert-danger"><?php echo $message ?></p>

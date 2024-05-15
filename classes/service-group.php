@@ -9,6 +9,7 @@ class ServiceGroup
   private $name;
   private $description;
   private $visibility_id;
+  private $status;
 
   /**
    * Constructs servicegroup from its data.
@@ -17,7 +18,7 @@ class ServiceGroup
    * @param String $description tooltip text
    * @param int $visibility_id how to display group items
    */
-  function __construct($id, $name, $description, $visibility_id)
+  function __construct($id, $name, $description, $visibility_id, $status)
 
   {
     //TODO: Maybe get data from ID?
@@ -145,8 +146,7 @@ class ServiceGroup
    * Get list of services groups.
    * @return array $groups
    */
-  public function get_groups()
-  {
+
     global $mysqli;
     $stmt = $mysqli->query("SELECT id, name FROM services_groups ORDER by name ASC");
 

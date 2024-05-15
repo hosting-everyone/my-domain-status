@@ -28,25 +28,7 @@ if (!file_exists("config.php")) {
   }
 } else {
 
-  require_once("config.php");
-  require_once("template.php");
-  require_once("classes/constellation.php");
-  require_once("classes/db-class.php");
-  $db = new SSDB();
-  define("NAME", $db->getSetting($mysqli, "name"));
-  define("TITLE", $db->getSetting($mysqli, "title"));
-  define("WEB_URL", $db->getSetting($mysqli, "url"));
-  define("MAILER_NAME", $db->getSetting($mysqli, "mailer"));
-  define("MAILER_ADDRESS", $db->getSetting($mysqli, "mailer_email"));
 
-  define("SUBSCRIBE_EMAIL", $db->getBooleanSetting($mysqli, "subscribe_email"));
-  define("SUBSCRIBE_TELEGRAM", $db->getBooleanSetting($mysqli, "subscribe_telegram"));
-  define("TG_BOT_USERNAME", $db->getSetting($mysqli, "tg_bot_username"));
-  define("TG_BOT_API_TOKEN", $db->getSetting($mysqli, "tg_bot_api_token"));
-  define("GOOGLE_RECAPTCHA", $db->getBooleanSetting($mysqli, "google_recaptcha"));
-  define("GOOGLE_RECAPTCHA_SITEKEY", $db->getSetting($mysqli, "google_recaptcha_sitekey"));
-  define("GOOGLE_RECAPTCHA_SECRET", $db->getSetting($mysqli, "google_recaptcha_secret"));
-  $offset = 0;
 
   if (isset($_GET['ajax'])) {
     $constellation->render_incidents(false, $_GET['offset'], 5);
@@ -97,7 +79,7 @@ if($db->getSetting($mysqli,"notifyUpdates") == "yes"){
     <?php $constellation->render_status(); ?>
   </div>
 
-  <?php if ($mysqli->query("SELECT count(*) FROM status")->num_rows) {
+
   ?>
     <div id="timeline">
       <div class="item">
@@ -114,3 +96,10 @@ if($db->getSetting($mysqli,"notifyUpdates") == "yes"){
 
   Template::render_footer();
 }
+?>
+<script>
+$(document).ready(function(){
+  $('[data-toggle="tooltip"]').tooltip();
+});
+</script>
+<?php

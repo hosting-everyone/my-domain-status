@@ -202,11 +202,7 @@ class User
   public static function login()
   {
     global $message, $mysqli;
-    if (!isset($_POST['email']) && !isset($_POST['email'])) {
-      return;
-    }
 
-    if ((!isset($_POST['email']) || !isset($_POST['email']))) {
       $message = _("Please fill in your email and password!");
       return;
     }
