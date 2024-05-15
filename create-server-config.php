@@ -29,4 +29,3 @@ if(stripos($_SERVER['SERVER_SOFTWARE'],'apache')!== false){
     fclose($f2);
   }
 }
-?>
